@@ -1,0 +1,41 @@
+
+
+<div class="container">
+  <h2>Company Search</h2>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Search by Company Name or Number</mat-label>
+    <input matInput placeholder="Enter company name or number" [(ngModel)]="searchQuery" name="searchQuery" required />
+  </mat-form-field>
+
+
+  <button mat-raised-button color="primary" (click)="searchCompanies()">
+    Search
+  </button>
+
+
+  <div *ngIf="companies.length > 0" class="search-results mt-4">
+    <h3>Results</h3>
+    <mat-list>
+      <div *ngFor="let company of companies">
+        <mat-card class="company-card">
+          <mat-card-title>
+            <a [routerLink]="['/company', company.company_number]">{{ company.title }}</a>
+          </mat-card-title>
+          <mat-card-content class="card-info">
+            <p><strong>Description:</strong> {{ company.description }}</p>
+            <p><strong>Address:</strong> {{ company.address_snippet }}</p>
+            <p><strong>Status:</strong> {{ company.company_status }}</p>
+            <p><strong>Date of Creation:</strong> {{ company.date_of_creation }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-list>
+  </div>
+
+
+  <div *ngIf="companies && companies.length === 0" class="mt-4">
+    <p>No companies found matching your search.</p>
+  </div>
+</div>
+
